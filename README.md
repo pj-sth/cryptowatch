@@ -1,2 +1,6 @@
-# cryptowatch
-A Python-based Crypto Tracker that fetches live prices, portfolio updates, and market summaries.
+## Getting Started
+
+1. Clone the repo
+``` bash
+    git clone https://github.com/pj-sth/cryptowatch.git
+    cd cryptowatch
