@@ -1,9 +1,10 @@
 import argparse
-from cryptowatch import api, storage, portfolio, chart, trending
+import uvicorn
+from cryptowatch import api, storage, portfolio, chart, trending, api_server
 
 def main():
     parser = argparse.ArgumentParser(
-        description = "CryptoWatch CLI - Track cryptocurrency prices, watchlist, portfolio, charts and trends"
+        description = "CryptoWatch CLI - Track cryptocurrency prices, watchlist, portfolio, charts and trends + API"
     )
 
     parser.add_argument("--price",help="Fetch current price of a cryptocurrency (e.g. bitcoin)")
@@ -13,10 +14,15 @@ def main():
     parser.add_argument("--portfolio", action="store_true", help="View your portfolio")
     parser.add_argument("--chart", nargs=2, metavar=('COIN', 'DAYS'), help="Show price chart for coin (e.g. bitcoin 7)")
     parser.add_argument("--trending", action="store_true", help="Show top gainers and losers in 24h")
+    parser.add_argument("--serve", action="store_true", help="Start the CryptoWatch REST API Server")
 
     args = parser.parse_args()
 
-    if args.add:
+    if args.serve:
+        print("Starting CryptoWatch API server on http://127.0.0.1:8000")
+        uvicorn.run("cryptowatch.api_server:app", reload=True)
+
+    elif args.add:
         storage.add_to_watchlist(args.add)
     
     elif args.watchlist:
