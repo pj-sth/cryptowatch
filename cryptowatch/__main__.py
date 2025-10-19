@@ -1,9 +1,9 @@
 import argparse
-from cryptowatch import api, storage, portfolio
+from cryptowatch import api, storage, portfolio, chart
 
 def main():
     parser = argparse.ArgumentParser(
-        description = "CryptoWatch CLI - Track cryptocurrency prices, watchlist & portfolio"
+        description = "CryptoWatch CLI - Track cryptocurrency prices, watchlist, portfolio & charts"
     )
 
     parser.add_argument("--price",help="Fetch current price of a cryptocurrency (e.g. bitcoin)")
@@ -11,6 +11,7 @@ def main():
     parser.add_argument("--watchlist",action="store_true",help="View your saved watchlist")
     parser.add_argument("--buy", nargs=2, metavar=('COIN', 'AMOUNT'), help="Add coin and amount to portfolio")
     parser.add_argument("--portfolio", action="store_true", help="View your portfolio")
+    parser.add_argument("--chart", nargs=2, metavar=('COIN', 'DAYS'), help="Show price chart for coin (e.g. bitcoin 7)")
 
     args = parser.parse_args()
 
@@ -38,6 +39,14 @@ def main():
 
     elif args.portfolio:
         portfolio.show_portfolio()
+
+    elif args.chart:
+        coin, days = args.chart
+        try:
+            days = int(days)
+            chart.plot_chart(coin, days)
+        except ValueError:
+            print("Invalid number of days. Use 7, 30, or 90.")
 
     elif args.price:
         coin_data = api.fetch_price(args.price)
