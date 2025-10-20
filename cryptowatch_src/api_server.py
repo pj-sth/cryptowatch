@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from cryptowatch import api, storage, trending
+from cryptowatch_src import api, storage, trending
 
 app = FastAPI(title="CryptoWatch API", version="1.0")
 
