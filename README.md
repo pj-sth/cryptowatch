@@ -1,6 +1,10 @@
-## Getting Started
+## Run with Docker
 
-1. Clone the repo
-``` bash
-    git clone https://github.com/pj-sth/cryptowatch.git
-    cd cryptowatch
+You can run CryptoWatch instantly using Docker:
+
+```bash
+# Build the image
+docker build -t cryptowatch .
+
+# Run the API server
+docker run -p 8000:8000 cryptowatch
