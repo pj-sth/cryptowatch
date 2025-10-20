@@ -1,6 +1,6 @@
 import json
 import os
-from cryptowatch import api
+from cryptowatch_src import api
 
 PORTFOLIO_FILE = "portfolio.json"
 

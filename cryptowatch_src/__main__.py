@@ -1,6 +1,6 @@
 import argparse
 import uvicorn
-from cryptowatch import api, storage, portfolio, chart, trending, api_server
+from cryptowatch_src import api, storage, portfolio, chart, trending, api_server
 
 def main():
     parser = argparse.ArgumentParser(
